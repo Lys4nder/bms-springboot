@@ -11,6 +11,9 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 
+import java.sql.SQLOutput;
+import java.util.Optional;
+
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Rollback(value = true)
@@ -42,7 +45,26 @@ public class TransactionRepositoryTest {
 
     @Test
     public void TestListAll() {
+        Iterable<Transaction> transactions = transactionRepository.findAll();
+        Assertions.assertNotNull(transactions);
 
+        for (Transaction transaction : transactions)
+            System.out.println(transaction);
+    }
+
+    @Test
+    public void TestGet() {
+        Optional<Transaction> transaction = transactionRepository.findById(1);
+        Assertions.assertTrue(transaction.isPresent());
+        System.out.println(transaction.get());
+    }
+    
+    @Test
+    public void TestUpdate() {
+        Optional<Transaction> transactionOptional = transactionRepository.findById(1);
+        Transaction transaction = transactionOptional.get();
+        transaction.setAmount(499.99f);
+        Assertions.assertEquals(transactionRepository.findById(1).get().getAmount(), 499.99f);
     }
 
 }

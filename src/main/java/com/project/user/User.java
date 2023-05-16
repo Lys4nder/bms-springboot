@@ -17,6 +17,16 @@ public class User {
     @Column(nullable = false, name="lastName", length = 45)
     private String lastName;
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
+    }
 
     public Integer getId() {
         return id;
