@@ -21,6 +21,16 @@ public class Transaction {
     @Column(name = "amount", nullable = false)
     private Float amount;
 
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "id=" + id +
+                ", user=" + user +
+                ", date='" + date + '\'' +
+                ", amount=" + amount +
+                '}';
+    }
+
     public String getUsername() {
         return user != null ? user.getId() + " " + user.getFirstName() + " " + user.getLastName() : null;
     }
