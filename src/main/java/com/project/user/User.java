@@ -16,6 +16,33 @@ public class User {
     private String firstName;
     @Column(nullable = false, name="lastName", length = 45)
     private String lastName;
+    @Column(nullable = false, name = "balance")
+    private Double balance;
+    public Double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
+    }
+
+    public void addToBalance(Double balance) {
+        this.balance += balance;
+    }
+
+    public void removeFromBalance(Float balance) {
+        this.balance -= balance;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    private Boolean enabled;
 
     @Override
     public String toString() {

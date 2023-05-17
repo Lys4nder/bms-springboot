@@ -1,7 +1,5 @@
 package com.project.transactions;
 
-import com.project.user.User;
-import com.project.user.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -21,6 +21,17 @@ public class Transaction {
     @Column(name = "amount", nullable = false)
     private Float amount;
 
+    @Column(name = "details", nullable = false, length = 30)
+    private String details;
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
+
     @Override
     public String toString() {
         return "Transaction{" +
