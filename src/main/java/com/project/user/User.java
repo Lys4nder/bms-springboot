@@ -12,27 +12,33 @@ public class User {
     private String email;
     @Column(nullable = false, length = 45)
     private String password;
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    @Column(nullable = false, name = "phoneNumber")
+    private String phoneNumber;
     @Column(nullable = false, name="firstName", length = 45)
     private String firstName;
     @Column(nullable = false, name="lastName", length = 45)
     private String lastName;
-    @Column(nullable = false, name = "balance")
-    private Double balance;
-    public Double getBalance() {
-        return balance;
-    }
 
-    public void setBalance(Double balance) {
-        this.balance = balance;
-    }
+    @Column(nullable = false, name = "address", length = 100)
+    private String address;
 
-    public void addToBalance(Double balance) {
-        this.balance += balance;
-    }
-
-    public void removeFromBalance(Float balance) {
-        this.balance -= balance;
-    }
 
     public Boolean getEnabled() {
         return enabled;
@@ -49,9 +55,11 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", address='" + address + '\'' +
+                ", enabled=" + enabled +
                 '}';
     }
 

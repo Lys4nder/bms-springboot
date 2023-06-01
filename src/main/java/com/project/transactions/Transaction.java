@@ -39,6 +39,7 @@ public class Transaction {
                 ", user=" + user +
                 ", date='" + date + '\'' +
                 ", amount=" + amount +
+                ", details='" + details + '\'' +
                 '}';
     }
 
