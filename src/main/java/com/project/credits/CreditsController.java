@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -37,7 +38,7 @@ public class CreditsController {
         return "credits_form";
     }
 
-    @GetMapping("/users/credits/save")
+    @PostMapping("/users/credits/save")
     public String addNewCredit(Credits credits, RedirectAttributes ra) {
         creditsRepository.save(credits);
         ra.addFlashAttribute("message", "The credit has been saved successfully");
