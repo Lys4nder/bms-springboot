@@ -14,7 +14,7 @@ public class Credits {
 
     @ManyToOne
     @JoinColumn(name = "id_client")
-    private User client;
+    private User user;
 
     @Column(name = "suma_credit")
     private double sumaCredit;
@@ -25,9 +25,9 @@ public class Credits {
     @Column(name = "durata")
     private int durata;
 
-    public Credits(Integer idCredit, User client, double sumaCredit, double dobanda, int durata) {
+    public Credits(Integer idCredit, User user, double sumaCredit, double dobanda, int durata) {
         this.idCredit = idCredit;
-        this.client = client;
+        this.user = user;
         this.sumaCredit = sumaCredit;
         this.dobanda = dobanda;
         this.durata = durata;
@@ -45,11 +45,11 @@ public class Credits {
     }
 
     public User getClient() {
-        return client;
+        return user;
     }
 
     public void setClient(User client) {
-        this.client = client;
+        this.user = client;
     }
 
     public double getSumaCredit() {
