@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Manage Transactions</title>
+    <title>Manage Accounts</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
@@ -47,11 +47,11 @@
 <div class="container-fluid text-center">
     <div class="row">
         <div class="col">
-            <h1 class="page-title">Manage User's Payments</h1>
+            <h1 class="page-title">Manage Accounts</h1>
         </div>
         <div class="col">
             <div class="text-right">
-                <a class="add-transaction-btn" th:href="@{/users/payments/new}">Add new payment</a>
+                <a class="add-transaction-btn" th:href="@{/accounts/new}">Add new account</a>
             </div>
         </div>
     </div>
@@ -62,20 +62,18 @@
         <table class="table table-bordered transaction-table">
             <thead>
             <tr>
-                <th style="max-width: 50px">Payment ID</th>
-                <th>Credit ID</th>
+                <th style="max-width: 50px">Account ID</th>
+                <th>Client ID</th>
+                <th>Account Type</th>
                 <th>Amount</th>
-                <th>Date</th>
-
             </tr>
             </thead>
             <tbody>
-            <tbody>
-            <tr th:each="payment : ${allPayments}">
-                <td th:text="${payment.idPlata}"></td>
-                <td th:text="${payment.credit.idCredit}"></td>
-                <td th:text="${payment.sumaPlatita}"></td>
-                <td th:text="${payment.data}"></td>
+            <tr th:each="account : ${accountsList}">
+                <td th:text="${account.idCont}"></td>
+                <td th:text="${account.client.id}"></td>
+                <td th:text="${account.tipCont}"></td>
+                <td th:text="${account.sold}"></td>
             </tr>
             </tbody>
         </table>

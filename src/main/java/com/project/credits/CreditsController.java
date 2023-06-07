@@ -30,7 +30,7 @@ public class CreditsController {
         return "credits_user";
     }
 
-    @GetMapping("/users/credits/new")
+    @GetMapping("/credits/new")
     public String showAddCreditForm(Model model) {
         model.addAttribute("credit", new Credits());
         model.addAttribute("pageTitle", "Add Credit");
