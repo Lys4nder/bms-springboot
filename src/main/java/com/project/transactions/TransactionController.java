@@ -1,5 +1,7 @@
 package com.project.transactions;
 
+import com.project.accounts.Accounts;
+import com.project.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,6 +41,9 @@ public class TransactionController {
     @PostMapping("users/transactions/save")
     public String addNewTransaction(Transaction transaction, RedirectAttributes ra) {
         transactionService.save(transaction);
+        User user = transaction.getUser();
+        Accounts userAccount = null;
+        userAccount.setSold(userAccount.getSold() - transaction.getAmount());
         ra.addFlashAttribute("message", "The transaction has been saved successfully");
         return "redirect:/users/transactions/all";
     }

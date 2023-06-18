@@ -27,6 +27,7 @@ public class CreditsController {
     public String showCreditsList(@PathVariable("id") Integer id, Model model) {
         List<Credits> creditsList = creditsRepository.findCreditsByUser_Id(id);
         model.addAttribute("creditsList", creditsList);
+        model.addAttribute("message", "View user's credits");
         return "credits_user";
     }
 
@@ -38,8 +39,8 @@ public class CreditsController {
     }
 
     @PostMapping("/users/credits/save")
-    public String addNewCredit(Credits credits, RedirectAttributes ra) {
-        creditsRepository.save(credits);
+    public String addNewCredit(Credits credit, RedirectAttributes ra) {
+        creditsRepository.save(credit);
         ra.addFlashAttribute("message", "The credit has been saved successfully");
         return "redirect:/users/credits/all";
     }

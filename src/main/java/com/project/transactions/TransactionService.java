@@ -19,15 +19,13 @@ public class TransactionService {
     public List<Transaction> findByUserId(Integer userId) {
         return transactionRepository.findByUserId(userId);
     }
+
     public void save(Transaction transaction) {
         transactionRepository.save(transaction);
     }
 
     public Transaction get(Integer id) throws TransactionNotFoundException {
-        Optional<Transaction> result = transactionRepository.findById(id);
-        if (result.isPresent()) {
-            return result.get();
-        }
-        throw new TransactionNotFoundException("Could not find any transaction with ID " + id);
+        return transactionRepository.findById(id)
+                .orElseThrow(() -> new TransactionNotFoundException("Could not find any transaction with ID " + id));
     }
 }

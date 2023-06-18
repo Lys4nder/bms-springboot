@@ -10,7 +10,7 @@ public class Credits {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_credit")
-    Integer idCredit;
+    private Integer idCredit;
 
     @ManyToOne
     @JoinColumn(name = "id_client")
@@ -44,12 +44,12 @@ public class Credits {
         this.idCredit = idCredit;
     }
 
-    public User getClient() {
+    public User getUser() {
         return user;
     }
 
-    public void setClient(User client) {
-        this.user = client;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public double getSumaCredit() {

@@ -71,7 +71,7 @@
       <tbody>
       <tr th:each="credit : ${creditsList}">
         <td th:text="${credit.idCredit}"></td>
-        <td th:text="${credit.client.id} + ' ' + ${credit.client.firstName} + ' ' + ${credit.client.lastName}"></td>
+        <td th:text="${credit.user.id} + ' ' + ${credit.user.firstName} + ' ' + ${credit.user.lastName}"></td>
         <td th:text="${credit.dobanda}"></td>
         <td th:text="${credit.durata}"></td>
       </tr>
