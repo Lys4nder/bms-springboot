@@ -1,6 +1,7 @@
 package com.project.payments;
 
 
+import com.project.credits.Credits;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,8 +33,15 @@ public class PaymentsController {
 
     @PostMapping("users/payments/save")
     public String addNewPayment(Payments payment, RedirectAttributes ra) {
-        paymentsService.save(payment);
-        ra.addFlashAttribute("message", "The payment has been saved successfully");
+        Credits credit = payment.getCredit();
+        if (credit.getSumaCredit() - payment.getSumaPlatita() >= 0) {
+            paymentsService.save(payment);
+            credit.setSumaCredit(credit.getSumaCredit() - payment.getSumaPlatita());
+            ra.addFlashAttribute("message", "The payment has been saved successfully");
+        }
+        else {
+            ra.addFlashAttribute("message", "The payment could not be processed");
+        }
         return "redirect:/users/payments/all";
     }
 }
