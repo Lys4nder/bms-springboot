@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Stats</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      padding: 2rem;
+    }
+
+    h1 {
+      margin-bottom: 2rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 2rem;
+    }
+
+    th, td {
+      padding: 0.75rem;
+      border: 1px solid #dee2e6;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f8f9fa;
+      font-weight: bold;
+    }
+
+    .chart-container {
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+<div class="container-fluid">
+  <a class="add-transaction-btn text-right" th:href="@{/users/transactions/new}">Add new transaction</a>
+
+  <h1>User Stats</h1>
+
+  <h2>User Information:</h2>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Email</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Phone Number</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td th:text="${user.id}"></td>
+      <td th:text="${user.email}"></td>
+      <td th:text="${user.firstName}"></td>
+      <td th:text="${user.lastName}"></td>
+      <td th:text="${user.phoneNumber}"></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h2>Recent Transactions:</h2>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>User</th>
+      <th>Date</th>
+      <th>Amount</th>
+      <th>Details</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="transaction : ${transactions}">
+      <td th:text="${transaction.id}"></td>
+      <td th:text="${transaction.username}"></td>
+      <td th:text="${transaction.date}"></td>
+      <td th:text="${transaction.amount}"></td>
+      <td th:text="${transaction.details}"></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="chart-container">
+    <canvas id="barChart"></canvas>
+  </div>
+
+  <h2>All Credits:</h2>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>User</th>
+      <th>Amount</th>
+      <th>Interest</th>
+      <th>Duration</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="credit : ${credits}">
+      <td th:text="${credit.idCredit}"></td>
+      <td th:text="${credit.user.email}"></td>
+      <td th:text="${credit.sumaCredit}"></td>
+      <td th:text="${credit.dobanda}"></td>
+      <td th:text="${credit.durata}"></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <script th:inline="javascript">
+
+    const transactionData = [[${transactions}]];
+
+    const barChart = new Chart(document.getElementById("barChart"), {
+      type: 'bar',
+      data: {
+        labels: transactionData.map(function (transaction) {
+          return transaction.date;
+        }),
+        datasets: [{
+          label: 'Transaction Amount',
+          data: transactionData.map(function (transaction) {
+            return transaction.amount;
+          }),
+          backgroundColor: 'rgba(54, 162, 235, 0.5)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+</div>
+</body>
+</html>

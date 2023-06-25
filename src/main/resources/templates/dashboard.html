@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bank Management System Dashboard</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      padding: 2rem;
+    }
+
+    h1 {
+      margin-bottom: 2rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 2rem;
+    }
+
+    th, td {
+      padding: 0.75rem;
+      border: 1px solid #dee2e6;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f8f9fa;
+      font-weight: bold;
+    }
+
+    canvas {
+      max-width: 100%;
+      margin-bottom: 2rem;
+    }
+  </style>
+</head>
+<body>
+<div class="ui-menu">
+  <a class="col menu-link" onclick="window.history.back()">Go back</a>
+  <a class="col menu-link" th:href="@{/users}">Users</a>
+  <a class="col menu-link" th:href="@{/users/transactions/all}">Transactions</a>
+  <a class="col menu-link" th:href="@{/users/credits/all}">Credits</a>
+  <a class="col menu-link" th:href="@{/users/payments/all}">Payments</a>
+  <a class="col menu-link" th:href="@{/accounts/all}">Accounts</a>
+</div>
+<div class="container">
+  <h1>Bank Management System Dashboard</h1>
+
+  <h2>Recent Transactions:</h2>
+  <div>
+    <canvas id="barChart"></canvas>
+  </div>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>User</th>
+      <th>Date</th>
+      <th>Amount</th>
+      <th>Details</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="transaction : ${transactions}">
+      <td th:text="${transaction.id}"></td>
+      <td th:text="${transaction.username}"></td>
+      <td th:text="${transaction.date}"></td>
+      <td th:text="${transaction.amount}"></td>
+      <td th:text="${transaction.details}"></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h2>All Credits:</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>User</th>
+        <th>Amount</th>
+        <th>Interest</th>
+        <th>Duration</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="credit : ${credits}">
+        <td th:text="${credit.idCredit}"></td>
+        <td th:text="${credit.user.email}"></td>
+        <td th:text="${credit.sumaCredit}"></td>
+        <td th:text="${credit.dobanda}"></td>
+        <td th:text="${credit.durata}"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>All Users:</h2>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Email</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Phone Number</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+      <td th:text="${user.id}"></td>
+      <td th:text="${user.email}"></td>
+      <td th:text="${user.firstName}"></td>
+      <td th:text="${user.lastName}"></td>
+      <td th:text="${user.phoneNumber}"></td>
+    </tr>
+    </tbody>
+  </table>
+
+
+
+  <script th:inline="javascript">
+
+    const transactionData = [[${transactions}]];
+
+    const barChart = new Chart(document.getElementById("barChart"), {
+      type: 'bar',
+      data: {
+        labels: transactionData.map(function (transaction) {
+          return transaction.date;
+        }),
+        datasets: [{
+          label: 'Transaction Amount',
+          data: transactionData.map(function (transaction) {
+            return transaction.amount;
+          }),
+          backgroundColor: 'rgba(54, 162, 235, 0.5)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+</div>
+</body>
+</html>

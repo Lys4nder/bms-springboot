@@ -26,7 +26,7 @@ public class LoginController {
 
         if (user != null && user.getPassword().equals(password)) {
             model.addAttribute("message", "Login successful!");
-            return "redirect:/users/transactions/" + user.getId();
+            return "redirect:/dashboard/" + user.getId();
         } else {
             model.addAttribute("message", "Invalid email or password");
             return "index";
